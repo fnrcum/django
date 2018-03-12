@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question
+from .models import Choice, Student
+from .forms import SignupForm
 
 
 class IndexView(generic.ListView):
@@ -16,29 +17,29 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        return Student.objects.filter(join_date__lte=timezone.now()).order_by('-join_date')[:5]
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'registration/detail.html'
-
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
-
-
+# class DetailView(generic.DetailView):
+#     model = Users
+#     template_name = 'registration/detail.html'
+#
+#     def get_queryset(self):
+#         """
+#         Excludes any questions that aren't published yet.
+#         """
+#         return Question.objects.filter(pub_date__lte=timezone.now())
+#
+#
 class ResultsView(generic.DetailView):
-    model = Question
+    model = Student
     template_name = 'registration/results.html'
 
 
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+def vote(request):
+    # question = get_object_or_404(Student, pk=users_id)
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice = Student.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'registration/detail.html', {

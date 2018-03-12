@@ -1,9 +1,58 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'registration:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No registrations are available.</p>
-{% endif %}
+{% extends "registration/base.html" %}
+<!--{% load static %}-->
+<!--<link rel="stylesheet" type="text/css" href="{% static 'registration/style.css' %}" />-->
+<!--{% if latest_question_list %}-->
+    <!--<ul>-->
+    <!--{% for question in latest_question_list %}-->
+        <!--<li><a href="{% url 'registration:detail' question.id %}">{{ question.question_text }}</a></li>-->
+    <!--{% endfor %}-->
+    <!--</ul>-->
+<!--{% else %}-->
+    <!--<p>No registrations are available.</p>-->
+<!--{% endif %}-->
+
+<!------ Include the above in your HEAD tag ---------->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Thank you for Sign Up!</div>
+                <div class="panel-body">
+                    <form action="{% url 'registration:vote' %}" method="post">
+                        {% csrf_token %}
+
+                        {{ form }}
+						<!--<div class="form-group">-->
+							<!--<label for="fname">First Name</label>-->
+							<!--<input type="text" id="fname" class="form-control" name="fname">-->
+						<!--</div>-->
+                        <!--<div class="form-group">-->
+							<!--<label for="lname">Last Name</label>-->
+							<!--<input type="text" id="lname" class="form-control" name="lname">-->
+                        <!--</div>-->
+						<!--<div class="form-group">-->
+							<!--<label for="emailaddr">Email Address</label>-->
+							<!--<input type="email" id="emailaddr" class="form-control" name="email">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+							<!--<label class="float-left">Select the convenient day(s) to attend</label>-->
+							<!--<div class="btn-group pull-right" data-toggle="buttons">-->
+                              <!--<label class="btn btn-primary">-->
+                                <!--<input type="checkbox" autocomplete="off" name="day1"> Tuesday-->
+                              <!--</label>-->
+                              <!--<label class="btn btn-primary">-->
+                                <!--<input type="checkbox" autocomplete="off" name="day2"> Thursday-->
+                              <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-primary btn-lg" id="submitbtn" name="submit">Submit!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

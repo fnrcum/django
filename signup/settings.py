@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'signup.urls'
@@ -84,8 +85,8 @@ WSGI_APPLICATION = 'signup.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ['DATABASE_URL']
-        # default='postgres://jppcfktytogwvd:e9f68cb529af93e15fd6c8da40c95e89b5fd44120b6882eff348efc239f69780@ec2-54-83-204-230.compute-1.amazonaws.com:5432/darb6fafkaobbt'
+        # default=os.environ['DATABASE_URL']
+        default='postgres://jppcfktytogwvd:e9f68cb529af93e15fd6c8da40c95e89b5fd44120b6882eff348efc239f69780@ec2-54-83-204-230.compute-1.amazonaws.com:5432/darb6fafkaobbt'
     )
 }
 
@@ -126,3 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

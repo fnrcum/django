@@ -1,0 +1,5 @@
+django>=2
+gunicorn>=19
+dj-database-url>=0.3.0
+python-decouple>=3
+psycopg2>=2.6.1

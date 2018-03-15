@@ -63,14 +63,19 @@ def register(request):
         # check whether it's valid:
         if form.is_valid():
             data = form.clean()
-            data['day1'] = 'Tuesday' if data['day1'] is True else ''
-            data['day2'] = 'Thursday' if data['day2'] is True else ''
+            # data['day1'] = 'Tuesday' if data['day1'] is True else ''
+            # data['day2'] = 'Thursday' if data['day2'] is True else ''
             s = Student(first_name=data['first_name'], last_name=data['last_name'], email=data['email'])
             s.save()
-            c = Choice(choice_text=data['day1'], email=s)
-            c.save()
-            c = Choice(choice_text=data['day2'], email=s)
-            c.save()
+            if data['day1'] and data['day2']:
+                c = Choice(choice_text="Both", email=s)
+                c.save()
+            elif data['day1'] and not data['day2']:
+                c = Choice(choice_text="Tuesday", email=s)
+                c.save()
+            else:
+                c = Choice(choice_text="Thursday", email=s)
+                c.save()
             return redirect('registration:index')
 
         # if a GET (or any other method) we'll create a blank form

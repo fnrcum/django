@@ -41,7 +41,7 @@
                         <div class="form-group">
 							<label class="float-left">Select the convenient day(s) to attend</label>
 							<div class="btn-group pull-right" data-toggle="buttons">
-                                <label class="btn btn-primary active">
+                                <label class="btn btn-primary">
                                 {{ form.day1 }} Tuesday
                               </label>
                               <label class="btn btn-primary">
@@ -79,6 +79,14 @@
 						<div class="form-group text-center">
 							<button type="submit" class="btn btn-primary btn-lg" id="submitbtn" name="submit">Submit!</button>
                         </div>
+                        <script>
+                            var checkBoxes = $('.mycheckboxes');
+                            checkBoxes.change(function () {
+                                $('#submitbtn').prop('disabled', checkBoxes.filter(':checked').length < 1);
+                            });
+                            checkBoxes.change(); // or add disabled="true" in the HTML
+
+                        </script>
                     </form>
                 </div>
             </div>

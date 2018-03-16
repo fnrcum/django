@@ -9,10 +9,10 @@ class SignupForm(forms.Form):
         attrs={'id': 'lname', 'class': 'form-control', 'required': True}))
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
         attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
-    day1 = forms.BooleanField(label="Tuesday", initial=True, required=False, widget=forms.CheckboxInput(
-        attrs={'id': 'day1', 'name': 'day1', 'checked': ''}))
+    day1 = forms.BooleanField(label="Tuesday", required=False, widget=forms.CheckboxInput(
+        attrs={'id': 'day1', 'name': 'day1', 'class': 'mycheckboxes'}))
     day2 = forms.BooleanField(label="Thursday", required=False, widget=forms.CheckboxInput(
-        attrs={'id': 'day2', 'name': 'day2'}))
+        attrs={'id': 'day2', 'name': 'day2', 'class': 'mycheckboxes'}))
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
@@ -23,7 +23,7 @@ class SignupForm(forms.Form):
         day2 = cleaned_data.get('day2')
 
         if not first_name and not last_name and not email and not day1 and not day2:
-            raise forms.ValidationError('All the information bust be inputed')
+            raise forms.ValidationError('All the information bust be inputed ')
 
         data = {'first_name': first_name,
                 'last_name': last_name,

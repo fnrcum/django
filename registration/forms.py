@@ -8,7 +8,7 @@ class SignupForm(forms.Form):
     last_name = forms.CharField(max_length=60, widget=forms.TextInput(
         attrs={'id': 'lname', 'class': 'form-control', 'required': True}))
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
-        attrs={'id': 'email', 'class': 'form-control', 'required': True}))
+        attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
     day1 = forms.BooleanField(label="Tuesday", initial=True, required=False, widget=forms.CheckboxInput(
         attrs={'id': 'day1', 'name': 'day1', 'checked': ''}))
     day2 = forms.BooleanField(label="Thursday", required=False, widget=forms.CheckboxInput(

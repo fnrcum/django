@@ -85,8 +85,8 @@ WSGI_APPLICATION = 'signup.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # default=os.environ['DATABASE_URL']
-        default='postgres://jppcfktytogwvd:e9f68cb529af93e15fd6c8da40c95e89b5fd44120b6882eff348efc239f69780@ec2-54-83-204-230.compute-1.amazonaws.com:5432/darb6fafkaobbt'
+        default=os.environ['DATABASE_URL']
+        # default='postgres://ndmfloyizhjfzj:ef50f72606164ddd945c4316d0906656a16887ebea2df621c72753de327d296f@ec2-54-83-23-91.compute-1.amazonaws.com:5432/d2ue2n99icjvhl'
     )
 }
 

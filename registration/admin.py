@@ -43,6 +43,40 @@ class DayChosenListFilter(admin.SimpleListFilter):
             return queryset.filter(choice__choice_text="Thursday")
 
 
+class HasLaptopListFilter(admin.SimpleListFilter):
+    title = _('laptop availability')
+    parameter_name = 'choice__has_laptop'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Y', _('Yes ({})'.format(Student.objects.filter(choice__has_laptop=True).count()))),
+            ('N', _('No ({})'.format(Student.objects.filter(choice__has_laptop=False).count()))),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'Y':
+            return queryset.filter(choice__has_laptop=True)
+        if self.value() == 'N':
+            return queryset.filter(choice__has_laptop=False)
+
+
+class AddendedBeforeListFilter(admin.SimpleListFilter):
+    title = _('previous attendance')
+    parameter_name = 'choice__attend_course'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Y', _('Yes ({})'.format(Student.objects.filter(choice__attend_course=True).count()))),
+            ('N', _('No ({})'.format(Student.objects.filter(choice__attend_course=False).count()))),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'Y':
+            return queryset.filter(choice__attend_course=True)
+        if self.value() == 'N':
+            return queryset.filter(choice__attend_course=False)
+
+
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 0
@@ -55,10 +89,11 @@ class StudentsAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
     list_display = ('first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason', 'join_date')
-    list_filter = (DayChosenListFilter, 'choice__has_laptop', 'choice__attend_course',)
+    list_filter = (DayChosenListFilter, HasLaptopListFilter, AddendedBeforeListFilter,)
     search_fields = ['first_name', 'last_name', 'email', 'join_date', 'choice__choice_text']
 
     def get_queryset(self, request):
+        print(self.model.objects.filter(choice__has_laptop=False))
         return self.model.objects.filter(choice__choice_text__in=["Both", "Tuesday", "Thursday"])
 
 
@@ -74,7 +109,7 @@ class StudentBothAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
     list_display = ('first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason', 'join_date')
-    list_filter = ('choice__has_laptop', 'choice__attend_course',)
+    list_filter = (HasLaptopListFilter, AddendedBeforeListFilter,)
     search_fields = ['first_name', 'last_name', 'email', 'join_date', 'choice__choice_text']
 
     def get_queryset(self, request):

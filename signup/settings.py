@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'co$l7i-#4w)v)75wozzlh7m93h7+d%fhij1m2b4qvf6f$((k-0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,8 +85,8 @@ WSGI_APPLICATION = 'signup.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ['DATABASE_URL']
-        # default='postgres://ndmfloyizhjfzj:ef50f72606164ddd945c4316d0906656a16887ebea2df621c72753de327d296f@ec2-54-83-23-91.compute-1.amazonaws.com:5432/d2ue2n99icjvhl'
+        # default=os.environ['DATABASE_URL']
+        default='postgres://ndmfloyizhjfzj:ef50f72606164ddd945c4316d0906656a16887ebea2df621c72753de327d296f@ec2-54-83-23-91.compute-1.amazonaws.com:5432/d2ue2n99icjvhl'
     )
 }
 

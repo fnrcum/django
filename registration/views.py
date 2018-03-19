@@ -63,18 +63,21 @@ def register(request):
         # check whether it's valid:
         if form.is_valid():
             data = form.clean()
-            # data['day1'] = 'Tuesday' if data['day1'] is True else ''
-            # data['day2'] = 'Thursday' if data['day2'] is True else ''
-            s = Student(first_name=data['first_name'], last_name=data['last_name'], email=data['email'])
+            s = Student(first_name=data['first_name'], last_name=data['last_name'], email=data['email'],
+                        previous_occupation=data['occupation'], course_referral=data['course_referral'],
+                        Application_reason=data['motivation'])
             s.save()
             if data['day1'] and data['day2']:
-                c = Choice(choice_text="Both", email=s)
+                c = Choice(choice_text="Both", has_laptop=data['laptop'], attend_course=data['previous_attend'],
+                           email=s)
                 c.save()
             elif data['day1'] and not data['day2']:
-                c = Choice(choice_text="Tuesday", email=s)
+                c = Choice(choice_text="Tuesday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
+                           email=s)
                 c.save()
             else:
-                c = Choice(choice_text="Thursday", email=s)
+                c = Choice(choice_text="Thursday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
+                           email=s)
                 c.save()
             return redirect('registration:index')
 

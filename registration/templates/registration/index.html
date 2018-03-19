@@ -39,6 +39,22 @@
 							{{ form.email }}
                         </div>
                         <div class="form-group">
+                            <label class="float-left">Did you attend this course previously?</label>
+                            <div class="btn-group pull-right" data-toggle="buttons">
+                                <label class="btn btn-primary">
+							        {{ form.previous_attend }} Attended
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="float-left">Do you own a laptop?</label>
+							<div class="btn-group pull-right" data-toggle="buttons">
+                                <label class="btn btn-primary">
+							        {{ form.laptop }} I own one
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
 							<label class="float-left">Select the convenient day(s) to attend</label>
 							<div class="btn-group pull-right" data-toggle="buttons">
                                 <label class="btn btn-primary">
@@ -48,6 +64,18 @@
                                 {{ form.day2 }} Thursday
                               </label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <strong>{{ form.occupation.label }}</strong>
+							{{ form.occupation }}
+                        </div>
+                        <div class="form-group">
+                            <strong>{{ form.course_referral.label }}</strong>
+							{{ form.course_referral }}
+						</div>
+                        <div class="form-group">
+                            <strong>{{ form.motivation.label }}</strong>
+							{{ form.motivation }}
                         </div>
 
 

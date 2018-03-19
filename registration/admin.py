@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Student, Choice
 
 
-class DecadeBornListFilter(admin.SimpleListFilter):
+class DayChosenListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
     title = _('the day chosen')
@@ -50,12 +50,12 @@ class ChoiceInline(admin.TabularInline):
 
 class StudentsAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['first_name', 'last_name', 'email']}),
+        (None,               {'fields': ['first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason']}),
         # ('Date information', {'fields': ['join_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]
-    list_display = ('first_name', 'last_name', 'email', 'join_date')
-    list_filter = (DecadeBornListFilter,)
+    list_display = ('first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason', 'join_date')
+    list_filter = (DayChosenListFilter, 'choice__has_laptop', 'choice__attend_course',)
     search_fields = ['first_name', 'last_name', 'email', 'join_date', 'choice__choice_text']
 
     def get_queryset(self, request):
@@ -69,12 +69,12 @@ class StudentBoth(Student):
 
 class StudentBothAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['first_name', 'last_name', 'email']}),
+        (None,               {'fields': ['first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason']}),
         # ('Date information', {'fields': ['join_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]
-    list_display = ('first_name', 'last_name', 'email', 'join_date')
-    # list_filter = (DecadeBornListFilter,)
+    list_display = ('first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason', 'join_date')
+    list_filter = ('choice__has_laptop', 'choice__attend_course',)
     search_fields = ['first_name', 'last_name', 'email', 'join_date', 'choice__choice_text']
 
     def get_queryset(self, request):

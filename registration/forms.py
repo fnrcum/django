@@ -33,10 +33,10 @@ class SignupForm(forms.Form):
                                       widget=forms.TextInput(attrs={'id': 'referral', 'class': 'form-control',
                                                                     'required': True, 'maxlength': '30',
                                                                     'placeholder': 'Facebook, a friend, from the University...'}))
-    motivation = forms.CharField(label="Please write a few words (in English) describing your reason / motivation for attending this course", max_length=500,
+    motivation = forms.CharField(label="Please write a few words (in English) describing your reason / motivation for attending this course", max_length=800,
                                  widget=forms.Textarea(attrs={'id': 'motivation', 'class': 'form-control',
                                                               'required': True, 'rows': "10", 'cols': "40",
-                                                              'maxlength': '500'}))
+                                                              'maxlength': '800'}))
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()

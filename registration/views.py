@@ -5,6 +5,7 @@ from django.views import generic
 from django.shortcuts import redirect
 from django.views.generic.edit import FormMixin
 from django.utils import timezone
+from django.contrib import messages
 
 from .models import Choice, Student
 from .forms import SignupForm
@@ -79,6 +80,7 @@ def register(request):
                 c = Choice(choice_text="Thursday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
                            email=s)
                 c.save()
+            messages.add_message(request, messages.SUCCESS, 'Registration successful.')
             return redirect('registration:index')
 
         # if a GET (or any other method) we'll create a blank form

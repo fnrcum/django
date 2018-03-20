@@ -11,3 +11,7 @@ li a {
   content:"*";
   color:red;
 }
+
+.no-bullet {
+list-style-type: none;
+}

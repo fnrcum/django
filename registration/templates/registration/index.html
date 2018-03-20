@@ -10,11 +10,9 @@
                 <div class="panel-heading">Sign up for Softvision - Software Testing 6.0 Workshop</div>
                 <div class="panel-body">
                     {% if messages %}
-                    <ul class="messages no-bullet">
                         {% for message in messages %}
-                        <li class="bg-success">{{ message }}</li>
+                        <p class="bg-success">{{ message }}</p>
                         {% endfor %}
-                    </ul>
                     {% endif %}
                     <form action="{% url 'registration:register' %}" method="post">
                         {% csrf_token %}

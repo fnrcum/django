@@ -18,9 +18,9 @@ class SignupForm(forms.Form):
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
         attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
     laptop = forms.ChoiceField(label="Do you have a personal laptop that you can bring to our meetings?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(
-        attrs={'id': 'laptop', 'name': 'laptop', 'class': 'radio-inline pull-right', 'required': True}))
+        attrs={'id': 'laptop', 'name': 'laptop', 'class': ' pull-left', 'required': True}))
     previous_attend = forms.ChoiceField(label="Did you previously attended one of our courses?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(
-        attrs={'id': 'attended', 'name': 'attended', 'class': 'radio-inline pull-right', 'required': True}))
+        attrs={'id': 'attended', 'name': 'attended', 'class': ' pull-left', 'required': True}))
     day1 = forms.BooleanField(label="Tuesday", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'day1', 'name': 'day1', 'class': 'mycheckboxes'}))
     day2 = forms.BooleanField(label="Thursday", required=False, widget=forms.CheckboxInput(

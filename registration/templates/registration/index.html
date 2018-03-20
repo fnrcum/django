@@ -29,35 +29,35 @@
 							{{ form.email }}
                         </div>
                         <div class="form-group">
-                            <label class="float-left control-label">Did you previously attend one of our courses?</label>
-                            <div class="btn-group btn-group-toggle pull-right" data-toggle="buttons">
+                            <label class="float-left control-label">Did you previously attend one of our courses?</label><br>
+                            <!--<div class="btn-group btn-group-toggle pull-left" data-toggle="buttons">-->
                                 {% for choice in form.previous_attend %}
-                                <label class="btn btn-secondary" style="margin-right: 2px;">
-                                    {{ choice }}
-                                </label>
+                                <!--<label class="btn btn-secondary" style="margin-right: 2px;">-->
+                                    {{ choice.tag }} &nbsp&nbsp <strong>{{ choice.choice_label }} </strong><br>
+                                <!--</label>-->
                                 {% endfor %}
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-                            <label class="float-left control-label">Do you have a personal laptop that you can bring to our meetings?</label>
-							<div class="btn-group btn-group-toggle pull-right" data-toggle="buttons">
-                                {% for choice in form.laptop %}
-                                <label class="btn btn-secondary" style="margin-right: 2px;">
-                                    {{ choice }}
-                                </label>
+                            <label class="float-left control-label">Do you have a personal laptop that you can bring to our meetings?</label><br>
+							<!--<div class="btn-group btn-group-toggle" data-toggle="radio">-->
+                                {% for choice2 in form.laptop %}
+                                <!--<label class="btn btn-secondary" style="margin-right: 2px;">-->
+                                    {{ choice2.tag }} &nbsp&nbsp <strong>{{ choice2.choice_label }} </strong><br>
+
                                 {% endfor %}
-                            </div>
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
-							<label class="float-left control-label">Which of the following days is convenient for you</label>
-							<div class="btn-group pull-right" data-toggle="buttons">
-                                <label class="btn btn-secondary" style="margin-right: 2px;">
-                                {{ form.day1 }} Tuesday
-                              </label>
-                              <label class="btn btn-secondary" style="margin-right: 2px;">
-                                {{ form.day2 }} Thursday
-                              </label>
-                            </div>
+							<label class="float-left control-label">Which of the following days is convenient for you</label> <br>
+							<!--<div class="btn-group pull-right" data-toggle="buttons">-->
+                                <!--<label class="btn btn-primary" style="margin-right: 2px;">-->
+                                {{ form.day1 }} &nbsp&nbsp<strong>Tuesday</strong> <br>
+                              <!--</label>-->
+                              <!--<label class="btn btn-primary" style="margin-right: 2px;">-->
+                                {{ form.day2 }} &nbsp&nbsp<strong>Thursday</strong>
+                              <!--</label>-->
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
                             <strong class="control-label">{{ form.occupation.label }}</strong>
@@ -72,8 +72,9 @@
 							{{ form.motivation }}
                         </div>
                         <div class="form-group">
-                            <p class="control-label2">All the questions are mandatory. Please answer in English!</p>
+                            <p class="control-label2 pull-right" style="color:red;">All the questions are mandatory. Please answer in English!</p>
                         </div>
+                        <br><br>
 
 
 

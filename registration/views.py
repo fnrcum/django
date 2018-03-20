@@ -41,22 +41,8 @@ class ResultsView(generic.DetailView):
 
 
 def register(request):
-    # question = get_object_or_404(Student, pk=users_id)
-    # try:
-    #     selected_choice = Student.choice_set.get(pk=request.POST['choice'])
-    # except (KeyError, Choice.DoesNotExist):
-    #     # Redisplay the question voting form.
-    #     return render(request, 'registration/detail.html', {
-    #         'question': question,
-    #         'error_message': "You didn't select a choice.",
-    #     })
-    # else:
-    #     selected_choice.votes += 1
-    #     selected_choice.save()
-    #     # Always return an HttpResponseRedirect after successfully dealing
-    #     # with POST data. This prevents data from being posted twice if a
-    #     # user hits the Back button.
-    #     return HttpResponseRedirect(reverse('registration:results', args=(question.id,)))
+    success_message = "You have been signed up for Softvision Software Testing 6.0 Workshop. If you are one of the " \
+                      "selected participants, you will receive an email with further details. Thank you for registering"
 
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -80,7 +66,7 @@ def register(request):
                 c = Choice(choice_text="Thursday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
                            email=s)
                 c.save()
-            messages.add_message(request, messages.SUCCESS, 'Registration successful.')
+            messages.add_message(request, messages.SUCCESS, success_message)
             return redirect('registration:index')
 
         # if a GET (or any other method) we'll create a blank form

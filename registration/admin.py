@@ -93,7 +93,6 @@ class StudentsAdmin(admin.ModelAdmin):
     search_fields = ['first_name', 'last_name', 'email', 'join_date', 'choice__choice_text']
 
     def get_queryset(self, request):
-        print(self.model.objects.filter(choice__has_laptop=False))
         return self.model.objects.filter(choice__choice_text__in=["Both", "Tuesday", "Thursday"])
 
 

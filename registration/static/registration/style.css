@@ -6,3 +6,8 @@ li a {
   content:"*";
   color:red;
 }
+
+.control-label2:before {
+  content:"*";
+  color:red;
+}

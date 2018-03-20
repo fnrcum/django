@@ -3,16 +3,24 @@ from django import forms
 
 class SignupForm(forms.Form):
 
+    YES_ATTENDED = True
+    NO_ATTENDED = False
+
+    ATTENDED_CHOICES = (
+        (YES_ATTENDED, 'Yes'),
+        (NO_ATTENDED, 'No'),
+    )
+
     first_name = forms.CharField(max_length=60, label="First Name", widget=forms.TextInput(
         attrs={'id': 'fname', 'class': 'form-control', 'required': True}))
     last_name = forms.CharField(max_length=60, widget=forms.TextInput(
         attrs={'id': 'lname', 'class': 'form-control', 'required': True}))
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
         attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
-    laptop = forms.BooleanField(label="Do you have a personal laptop that you can bring to our meetings?", required=False, widget=forms.CheckboxInput(
-        attrs={'id': 'laptop', 'name': 'laptop', 'class': 'mycheckboxes2'}))
-    previous_attend = forms.BooleanField(label="Did you previously attended one of our courses?", required=False, widget=forms.CheckboxInput(
-        attrs={'id': 'attended', 'name': 'attended', 'class': 'mycheckboxes2'}))
+    laptop = forms.ChoiceField(label="Do you have a personal laptop that you can bring to our meetings?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(
+        attrs={'id': 'laptop', 'name': 'laptop', 'class': 'radio-inline pull-right', 'required': True}))
+    previous_attend = forms.ChoiceField(label="Did you previously attended one of our courses?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(
+        attrs={'id': 'attended', 'name': 'attended', 'class': 'radio-inline pull-right', 'required': True}))
     day1 = forms.BooleanField(label="Tuesday", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'day1', 'name': 'day1', 'class': 'mycheckboxes'}))
     day2 = forms.BooleanField(label="Thursday", required=False, widget=forms.CheckboxInput(
@@ -21,14 +29,14 @@ class SignupForm(forms.Form):
                                  widget=forms.TextInput(
         attrs={'id': 'occupation', 'class': 'form-control', 'required': True, 'maxlength': '60', 'placeholder':
             'Astronaut'}))
-    course_referral = forms.CharField(label="How did you find about this course?", max_length=30,
+    course_referral = forms.CharField(label="How did you find out about this course?", max_length=30,
                                       widget=forms.TextInput(attrs={'id': 'referral', 'class': 'form-control',
                                                                     'required': True, 'maxlength': '30',
-                                                                    'placeholder': 'University'}))
-    motivation = forms.CharField(label="What is your reason / motivation for attending this course?", max_length=500,
+                                                                    'placeholder': 'Facebook, a friend, from the University...'}))
+    motivation = forms.CharField(label="Please write a few words (in English) describing your reason / motivation for attending this course", max_length=500,
                                  widget=forms.Textarea(attrs={'id': 'motivation', 'class': 'form-control',
                                                               'required': True, 'rows': "10", 'cols': "40",
-                                                              'maxlength': '500', 'placeholder': 'What is it?'}))
+                                                              'maxlength': '500'}))
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()

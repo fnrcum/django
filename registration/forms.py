@@ -9,18 +9,19 @@ class SignupForm(forms.Form):
         attrs={'id': 'lname', 'class': 'form-control', 'required': True}))
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
         attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
-    laptop = forms.BooleanField(label="Have Laptop", required=False, widget=forms.CheckboxInput(
+    laptop = forms.BooleanField(label="Do you have a personal laptop that you can bring to our meetings?", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'laptop', 'name': 'laptop', 'class': 'mycheckboxes2'}))
-    previous_attend = forms.BooleanField(label="Attended previous sessions", required=False, widget=forms.CheckboxInput(
+    previous_attend = forms.BooleanField(label="Did you previously attended one of our courses?", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'attended', 'name': 'attended', 'class': 'mycheckboxes2'}))
     day1 = forms.BooleanField(label="Tuesday", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'day1', 'name': 'day1', 'class': 'mycheckboxes'}))
     day2 = forms.BooleanField(label="Thursday", required=False, widget=forms.CheckboxInput(
         attrs={'id': 'day2', 'name': 'day2', 'class': 'mycheckboxes'}))
-    occupation = forms.CharField(label="Occupation", max_length=60, widget=forms.TextInput(
+    occupation = forms.CharField(label="Tell us about your previous / current occupation.", max_length=60,
+                                 widget=forms.TextInput(
         attrs={'id': 'occupation', 'class': 'form-control', 'required': True, 'maxlength': '60', 'placeholder':
             'Astronaut'}))
-    course_referral = forms.CharField(label="Where did you find out about this course", max_length=30,
+    course_referral = forms.CharField(label="How did you find about this course?", max_length=30,
                                       widget=forms.TextInput(attrs={'id': 'referral', 'class': 'form-control',
                                                                     'required': True, 'maxlength': '30',
                                                                     'placeholder': 'University'}))

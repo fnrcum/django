@@ -42,7 +42,7 @@ class ResultsView(generic.DetailView):
 
 def register(request):
     success_message = "You have been signed up for Softvision Software Testing 6.0 Workshop. If you are one of the " \
-                      "selected participants, you will receive an email with further details. Thank you for registering"
+                      "selected participants, you will receive an email with further details. Thank you for registering!"
 
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:

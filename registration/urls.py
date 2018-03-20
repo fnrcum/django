@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 
 from . import views
@@ -8,4 +10,4 @@ urlpatterns = [
     # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     path('/register/', views.register, name='register'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

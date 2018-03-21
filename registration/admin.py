@@ -33,7 +33,7 @@ class DayChosenListFilter(admin.SimpleListFilter):
         provided in the query string and retrievable via
         `self.value()`.
         """
-        # Compare the requested value (either '80s' or '90s')
+        # Compare the requested values
         # to decide how to filter the queryset.
         if self.value() == 'Both':
             return queryset.filter(choice__choice_text="Both")

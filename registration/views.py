@@ -1,6 +1,3 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.views import generic
 from django.shortcuts import redirect
 from django.views.generic.edit import FormMixin
@@ -17,24 +14,10 @@ class IndexView(FormMixin, generic.ListView):
     form_class = SignupForm
 
     def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
+
         return Student.objects.filter(join_date__lte=timezone.now()).order_by('-join_date')[:5]
 
 
-# class DetailView(generic.DetailView):
-#     model = Users
-#     template_name = 'registration/detail.html'
-#
-#     def get_queryset(self):
-#         """
-#         Excludes any questions that aren't published yet.
-#         """
-#         return Question.objects.filter(pub_date__lte=timezone.now())
-#
-#
 class ResultsView(generic.DetailView):
     model = Student
     template_name = 'registration/results.html'
@@ -69,8 +52,8 @@ def register(request):
             messages.add_message(request, messages.SUCCESS, success_message)
             return redirect('registration:index')
 
-        # if a GET (or any other method) we'll create a blank form
     else:
+        # ignore this, need to add a redirect if the form is not valid which for now is handled by html code
         form = SignupForm()
 
     return redirect('registration:index')

@@ -1,0 +1,182 @@
+{% extends "registration/base.html" %}
+
+{% block content %}
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<div class="container">
+    <form class="form-horizontal" role="form" method="POST" action="{% url 'registration:register' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <h3>Sign up for Softvision - Software Testing 6.0 Workshop</h3>
+                {% if messages %}
+                    {% for message in messages %}
+                    <p class="bg-success">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <div class="row center-block">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="control-label">{{ form.first_name.label }}</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        {{ form.first_name }}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="control-label">{{ form.last_name.label }}</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="control-label">{{ form.email.label }}</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                        {{ form.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="control-label">{{ form.password.label }}</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                        {{ form.password }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">Did you previously attend one of our courses?</strong>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {% for choice in form.previous_attend %}
+                            {{ choice.tag }} &nbsp&nbsp <strong>{{ choice.choice_label }}</strong> &nbsp&nbsp
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">Do you have a personal laptop that you can bring to our meetings?</strong><br>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {% for choice2 in form.laptop %}
+                            {{ choice2.tag }} &nbsp&nbsp <strong>{{ choice2.choice_label }} </strong> &nbsp&nbsp
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">Which of the following days is convenient for you?</strong><br>
+            </div>
+            <div class="col-md-6 pull-left">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {{ form.day1 }} &nbsp&nbsp<strong>Tuesday</strong> &nbsp&nbsp
+
+                        {{ form.day2 }} &nbsp&nbsp<strong>Thursday</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">{{ form.occupation.label }}</strong><br>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {{ form.occupation }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">{{ form.course_referral.label }}</strong><br>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {{ form.course_referral }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <strong class="float-left control-label">{{ form.motivation.label }}</strong><br>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0 pull-left">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-question-circle"></i></div>
+                        {{ form.motivation }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label2 text-center" style="color:red;">All the questions are mandatory. Please answer in English!</p>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success" id="submitbtn"><i class="fa fa-user-plus"></i> Register</button>
+            </div>
+        </div>
+        <script>
+            var checkBoxes = $('.mycheckboxes');
+            checkBoxes.change(function () {
+                $('#submitbtn').prop('disabled', checkBoxes.filter(':checked').length < 1);
+            });
+            checkBoxes.change(); // or add disabled="true" in the HTML
+
+        </script>
+    </form>
+</div>
+{% endblock %}

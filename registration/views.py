@@ -18,6 +18,16 @@ class IndexView(FormMixin, generic.ListView):
         return Student.objects.filter(join_date__lte=timezone.now()).order_by('-join_date')[:5]
 
 
+class RegistrationView(FormMixin, generic.ListView):
+    template_name = 'registration/registration.html'
+    context_object_name = 'latest_question_list'
+    form_class = SignupForm
+
+    def get_queryset(self):
+
+        return Student.objects.filter(join_date__lte=timezone.now()).order_by('-join_date')[:5]
+
+
 class ResultsView(generic.DetailView):
     model = Student
     template_name = 'registration/results.html'

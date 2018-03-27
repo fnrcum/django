@@ -17,6 +17,8 @@ class SignupForm(forms.Form):
         attrs={'id': 'lname', 'class': 'form-control', 'required': True}))
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
         attrs={'id': 'email', 'class': 'form-control', 'required': True, 'type': 'email'}))
+    password = forms.CharField(max_length=60, widget=forms.PasswordInput(
+        attrs={'id': 'password', 'class': 'form-control', 'required': True}))
     laptop = forms.ChoiceField(label="Do you have a personal laptop that you can bring to our meetings?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(
         attrs={'id': 'laptop', 'name': 'laptop', 'class': ' pull-left', 'required': True}))
     previous_attend = forms.ChoiceField(label="Did you previously attended one of our courses?", required=False, choices=ATTENDED_CHOICES, widget=forms.RadioSelect(

@@ -84,7 +84,7 @@ class ChoiceInline(admin.TabularInline):
 
 class StudentsAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['first_name', 'last_name', 'email', 'previous_occupation', 'course_referral', 'Application_reason']}),
+        (None,               {'fields': ['first_name', 'last_name', 'email', 'password', 'previous_occupation', 'course_referral', 'Application_reason']}),
         # ('Date information', {'fields': ['join_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]

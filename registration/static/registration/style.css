@@ -22,3 +22,11 @@ list-style-type: none;
     text-align: right;
   }
 }
+
+.push-down-icon{
+ padding-top: 12px;
+}
+
+.push-down-icon-bool{
+ padding-top: 5px;
+}

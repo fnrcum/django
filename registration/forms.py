@@ -45,6 +45,7 @@ class SignupForm(forms.Form):
         first_name = cleaned_data.get('first_name')
         last_name = cleaned_data.get('last_name')
         email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
         laptop = cleaned_data.get('laptop')
         previous_attend = cleaned_data.get('previous_attend')
         day1 = cleaned_data.get('day1')
@@ -53,13 +54,14 @@ class SignupForm(forms.Form):
         course_referral = cleaned_data.get('course_referral')
         motivation = cleaned_data.get('motivation')
 
-        if not first_name and not last_name and not email and not day1 and not day2 and not laptop and not \
+        if not first_name and not last_name and not email and not password and not day1 and not day2 and not laptop and not \
                 previous_attend and not occupation and not course_referral and not motivation:
             raise forms.ValidationError('All the information bust be inputed ')
 
         data = {'first_name': first_name,
                 'last_name': last_name,
                 'email': email,
+                'password': password,
                 'laptop': laptop,
                 'previous_attend': previous_attend,
                 'day1': day1,

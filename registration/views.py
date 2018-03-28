@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.views.generic.edit import FormMixin
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
+from hashlib import md5
 
 from .models import Choice, Student
 from .forms import SignupForm
@@ -36,34 +38,27 @@ class ResultsView(generic.DetailView):
 def register(request):
     success_message = "You have been signed up for Softvision Software Testing 6.0 Workshop. If you are one of the " \
                       "selected participants, you will receive an email with further details. Thank you for registering!"
+    fail_message = "We encountered an error when registering you"
 
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = SignupForm(request.POST)
-        # check whether it's valid:
         if form.is_valid():
             data = form.clean()
-            s = Student(first_name=data['first_name'], last_name=data['last_name'], email=data['email'],
+            password = md5(data['password'].encode('utf-8') + data['email'].encode('utf-8')).hexdigest()
+            s = Student(first_name=data['first_name'], last_name=data['last_name'], email=data['email'], password=password,
                         previous_occupation=data['occupation'], course_referral=data['course_referral'],
                         Application_reason=data['motivation'])
             s.save()
-            if data['day1'] and data['day2']:
-                c = Choice(choice_text="Both", has_laptop=data['laptop'], attend_course=data['previous_attend'],
-                           email=s)
-                c.save()
-            elif data['day1'] and not data['day2']:
-                c = Choice(choice_text="Tuesday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
-                           email=s)
-                c.save()
-            else:
-                c = Choice(choice_text="Thursday", has_laptop=data['laptop'], attend_course=data['previous_attend'],
-                           email=s)
-                c.save()
+            choice_text = "Both" if data['day1'] and data['day2'] else "Tuesday" if data['day1'] and not data['day2'] else "Thursday"
+            c = Choice(choice_text=choice_text, has_laptop=data['laptop'], attend_course=data['previous_attend'],
+                       email=s)
+            c.save()
             messages.add_message(request, messages.SUCCESS, success_message)
-            return redirect('registration:index')
+            return redirect('registration:registration')
 
     else:
-        # ignore this, need to add a redirect if the form is not valid which for now is handled by html code
-        form = SignupForm()
+        messages.add_message(request, messages.MessageFailure, fail_message)
+        print("Error else")
+        return redirect('registration:registration')
 
-    return redirect('registration:index')
+    return redirect('registration:registration')
